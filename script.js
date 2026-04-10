@@ -278,10 +278,31 @@ const revealObserver = new IntersectionObserver(entries => {
 reveals.forEach(el => revealObserver.observe(el));
 
 // ==================== CONTACT FORM ====================
-document.getElementById('contactForm').addEventListener('submit', e => {
+document.getElementById('contactForm').addEventListener('submit', async e => {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
-  btn.textContent = '送信しました！ありがとうございました。';
+  btn.textContent = '送信中...';
   btn.disabled = true;
-  btn.style.background = '#16a34a';
+
+  const data = new FormData(e.target);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data,
+    });
+    const json = await res.json();
+    if (json.success) {
+      btn.textContent = '送信しました！ありがとうございました。';
+      btn.style.background = '#16a34a';
+      e.target.reset();
+    } else {
+      btn.textContent = '送信に失敗しました。もう一度お試しください。';
+      btn.style.background = '#dc2626';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = '送信に失敗しました。もう一度お試しください。';
+    btn.style.background = '#dc2626';
+    btn.disabled = false;
+  }
 });

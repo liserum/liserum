@@ -240,25 +240,28 @@
       <p class="contact-section__label">CONTACT</p>
       <h2 class="contact-section__title">まずは、<br>お気軽にご相談ください。</h2>
       <p class="contact-section__sub">資料請求・ご相談は無料です。専門スタッフが丁寧にお答えします。</p>
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" novalidate>
+        <input type="hidden" name="access_key" value="a42a2184-6989-4f60-8b69-39778a578bc6">
+        <input type="hidden" name="subject" value="【Liserum】お問い合わせが届きました">
+        <input type="hidden" name="from_name" value="Liserum HP">
         <div class="contact-form__row">
           <div class="contact-form__group">
             <label>会社名 <span>*</span></label>
-            <input type="text" placeholder="株式会社〇〇" required>
+            <input type="text" name="会社名" placeholder="株式会社〇〇" required>
           </div>
           <div class="contact-form__group">
             <label>お名前 <span>*</span></label>
-            <input type="text" placeholder="山田 太郎" required>
+            <input type="text" name="name" placeholder="山田 太郎" required>
           </div>
         </div>
         <div class="contact-form__row">
           <div class="contact-form__group">
             <label>メールアドレス <span>*</span></label>
-            <input type="email" placeholder="info@example.com" required>
+            <input type="email" name="email" placeholder="info@example.com" required>
           </div>
           <div class="contact-form__group">
             <label>ご関心のあるサービス</label>
-            <select>
+            <select name="ご関心のあるサービス">
               <option value="">選択してください</option>
               <option>AI導入支援</option>
               <option>法人AI研修</option>
@@ -269,7 +272,7 @@
         </div>
         <div class="contact-form__group">
           <label>お問い合わせ内容</label>
-          <textarea rows="5" placeholder="ご質問・ご要望をご記入ください。"></textarea>
+          <textarea name="お問い合わせ内容" rows="5" placeholder="ご質問・ご要望をご記入ください。"></textarea>
         </div>
         <button type="submit" class="btn-primary btn-primary--full" id="submitBtn">資料請求・送信する</button>
       </form>
