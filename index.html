@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liserum | AI導入支援・法人AI研修</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#" class="header__logo">Liserum</a>
+      <nav class="header__nav">
+        <a href="#about">Liserumとは</a>
+        <a href="#services">サービス</a>
+        <a href="#company">会社概要</a>
+        <a href="#news">NEWS</a>
+      </nav>
+      <a href="#contact" class="header__cta">資料請求</a>
+      <button class="header__hamburger" id="hamburger">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav__inner">
+      <a href="#about" class="mobile-nav__link">Liserumとは</a>
+      <a href="#services" class="mobile-nav__link">サービス</a>
+      <a href="#company" class="mobile-nav__link">会社概要</a>
+      <a href="#news" class="mobile-nav__link">NEWS</a>
+      <a href="#contact" class="mobile-nav__cta">資料請求</a>
+    </div>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <canvas class="hero__canvas" id="heroCanvas"></canvas>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__label">AI × Wellbeing</p>
+      <h1 class="hero__title">人類の<br>ウェルビーイングを<br>実現する。</h1>
+      <p class="hero__sub">AI導入支援・法人AI研修で、貴社の変革を支援します。</p>
+      <div class="hero__actions">
+        <a href="#services" class="btn-ghost">サービスを見る</a>
+        <a href="#contact" class="btn-primary">資料請求</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ==================== VISION / MISSION ==================== -->
+  <section class="vm-section">
+    <div class="vm-section__inner">
+      <div class="vm-block vm-block--vision">
+        <p class="vm-block__label">VISION</p>
+        <h2 class="vm-block__text">
+          人類全員が、持続的な<br>ウェルビーイングを<br>実現できている社会。
+        </h2>
+      </div>
+      <div class="vm-block vm-block--mission">
+        <p class="vm-block__label">MISSION</p>
+        <p class="vm-block__text vm-block__text--mission">
+          人類のウェルビーイングを妨げる課題を事業を通じて解決し、持続的な豊かさを実現する。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section class="services-section" id="services">
+    <div class="services-section__header">
+      <h2 class="services-section__title">サービス</h2>
+    </div>
+    <div class="services-section__grid">
+
+      <article class="service-card" data-service="01">
+        <div class="service-card__visual service-card__visual--impl">
+          <div class="service-card__visual-inner">
+            <div class="visual-nodes" id="visualNodes1"></div>
+          </div>
+          <div class="service-card__overlay">
+            <p class="service-card__num">01</p>
+            <h3 class="service-card__name">AI導入支援</h3>
+            <p class="service-card__sub">AI Implementation</p>
+          </div>
+        </div>
+        <div class="service-card__body">
+          <p class="service-card__desc">現状の業務フローを精査し、AIが最も効果を発揮できる領域を特定。戦略立案から本番導入・運用定着まで、伴走型でサポートします。</p>
+          <ul class="service-card__points">
+            <li>業務課題ヒアリング・現状分析</li>
+            <li>AI活用戦略の策定</li>
+            <li>PoC設計・実施</li>
+            <li>システム構築・既存システム連携</li>
+            <li>導入後の運用サポート</li>
+          </ul>
+          <a href="#contact" class="service-card__link">詳しく相談する →</a>
+        </div>
+      </article>
+
+      <article class="service-card" data-service="02">
+        <div class="service-card__visual service-card__visual--train">
+          <div class="service-card__visual-inner">
+            <div class="visual-nodes" id="visualNodes2"></div>
+          </div>
+          <div class="service-card__overlay">
+            <p class="service-card__num">02</p>
+            <h3 class="service-card__name">法人AI研修</h3>
+            <p class="service-card__sub">Corporate AI Training</p>
+          </div>
+        </div>
+        <div class="service-card__body">
+          <p class="service-card__desc">経営層から現場担当者まで、役割に応じたAIリテラシー教育を提供。実践的なハンズオン研修で、即戦力のAI人材を育成します。</p>
+          <ul class="service-card__points">
+            <li>AIリテラシー基礎研修</li>
+            <li>生成AI活用実践ワークショップ</li>
+            <li>部門別カスタマイズ研修</li>
+            <li>プロンプトエンジニアリング講座</li>
+            <li>AI推進リーダー育成プログラム</li>
+          </ul>
+          <a href="#contact" class="service-card__link">カリキュラムを見る →</a>
+        </div>
+      </article>
+
+    </div>
+    <div class="services-section__cta">
+      <a href="#contact" class="btn-primary">資料請求</a>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section class="about-section" id="about">
+    <div class="about-section__bg">
+      <div class="about-section__gradient"></div>
+    </div>
+    <div class="about-section__content">
+      <p class="about-section__label">ABOUT LISERUM</p>
+      <h2 class="about-section__title">なぜ、豊かな日本で<br>人は幸せになれないのか。</h2>
+      <p class="about-section__body">
+        世界有数の平和で、安全で、便利な国・日本。<br>
+        それでも、日本の幸福度ランキングは世界51位。<br>
+        <br>
+        これほど恵まれた時代に生きているのに、<br>
+        なぜ私たちは幸せを実感しにくいのか。<br>
+        <br>
+        この違和感こそが、Liserumの出発点です。<br>
+        私たちは事業を通じて、一人ひとりの幸福度を<br>
+        本質的に高めることに挑み続けます。
+      </p>
+      <a href="#contact" class="btn-primary">資料請求</a>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section class="features-section">
+    <div class="features-section__header">
+      <h2 class="features-section__title">Liserumの特徴</h2>
+    </div>
+    <div class="features-section__grid">
+      <div class="feature-card">
+        <p class="feature-card__num">01</p>
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="34" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="30" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="34" cy="30" r="3" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="12" x2="15" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="31" y1="12" x2="25" y2="16" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="28" x2="15" y2="24" stroke="currentColor" stroke-width="1.5"/><line x1="31" y1="28" x2="25" y2="24" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="feature-card__title">現場起点の<br>アプローチ</h3>
+        <p class="feature-card__desc">技術ありきではなく、現場の業務課題から出発。実際に使われるAIの仕組みを構築します。</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-card__num">02</p>
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M8 20h24M20 8v24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3"/></svg>
+        </div>
+        <h3 class="feature-card__title">一気通貫の<br>伴走支援</h3>
+        <p class="feature-card__desc">戦略→PoC→実装→研修→運用まで一社で完結。ベンダー間の連携コストをゼロに。</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-card__num">03</p>
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 40 40" fill="none"><path d="M20 4L4 12v8c0 9.4 6.8 18.2 16 20 9.2-1.8 16-10.6 16-20v-8L20 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 20l4 4 8-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="feature-card__title">業界特化の<br>知見</h3>
+        <p class="feature-card__desc">製造・金融・医療・小売など多様な業種への実績。業界固有の規制・慣習を踏まえた提案。</p>
+      </div>
+      <div class="feature-card">
+        <p class="feature-card__num">04</p>
+        <div class="feature-card__icon">
+          <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="16" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M14 16v-4a6 6 0 0112 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="25" r="2" fill="currentColor"/></svg>
+        </div>
+        <h3 class="feature-card__title">安心の<br>セキュリティ対応</h3>
+        <p class="feature-card__desc">情報セキュリティを最優先に、社内データの取り扱いからAIガバナンス設計まで対応。</p>
+      </div>
+    </div>
+    <div class="features-section__cta">
+      <a href="#contact" class="btn-primary">資料請求</a>
+    </div>
+  </section>
+
+  <!-- ==================== COMPANY ==================== -->
+  <section class="company-section" id="company">
+    <div class="company-section__inner">
+      <h2 class="company-section__title">会社概要</h2>
+      <table class="company-table">
+        <tbody>
+          <tr><th>会社名</th><td>Liserum合同会社</td></tr>
+          <tr><th>設立</th><td>2026年4月1日</td></tr>
+          <tr><th>代表</th><td>後藤 寛太</td></tr>
+          <tr><th>所在地</th><td>千葉県</td></tr>
+          <tr><th>事業内容</th><td>AI導入支援、法人AI研修</td></tr>
+          <tr><th>メール</th><td>k.goto@liserum.com</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==================== NEWS ==================== -->
+  <section class="news-section" id="news">
+    <div class="news-section__inner">
+      <h2 class="news-section__title">NEWS</h2>
+      <div class="news-grid">
+        <article class="news-card">
+          <p class="news-card__date">2025.04.01</p>
+          <p class="news-card__tag">お知らせ</p>
+          <h3 class="news-card__title">Liserumウェブサイトをリニューアルしました</h3>
+        </article>
+        <article class="news-card">
+          <p class="news-card__date">2025.03.15</p>
+          <p class="news-card__tag">サービス</p>
+          <h3 class="news-card__title">法人AI研修プログラムの新コース「AI推進リーダー育成」を開始</h3>
+        </article>
+        <article class="news-card">
+          <p class="news-card__date">2025.02.28</p>
+          <p class="news-card__tag">実績</p>
+          <h3 class="news-card__title">製造業大手へのAI導入支援プロジェクトが本番稼働を開始</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT / 資料請求 ==================== -->
+  <section class="contact-section" id="contact">
+    <div class="contact-section__inner">
+      <p class="contact-section__label">CONTACT</p>
+      <h2 class="contact-section__title">まずは、<br>お気軽にご相談ください。</h2>
+      <p class="contact-section__sub">資料請求・ご相談は無料です。専門スタッフが丁寧にお答えします。</p>
+      <form class="contact-form" id="contactForm">
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label>会社名 <span>*</span></label>
+            <input type="text" placeholder="株式会社〇〇" required>
+          </div>
+          <div class="contact-form__group">
+            <label>お名前 <span>*</span></label>
+            <input type="text" placeholder="山田 太郎" required>
+          </div>
+        </div>
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label>メールアドレス <span>*</span></label>
+            <input type="email" placeholder="info@example.com" required>
+          </div>
+          <div class="contact-form__group">
+            <label>ご関心のあるサービス</label>
+            <select>
+              <option value="">選択してください</option>
+              <option>AI導入支援</option>
+              <option>法人AI研修</option>
+              <option>両方</option>
+              <option>その他</option>
+            </select>
+          </div>
+        </div>
+        <div class="contact-form__group">
+          <label>お問い合わせ内容</label>
+          <textarea rows="5" placeholder="ご質問・ご要望をご記入ください。"></textarea>
+        </div>
+        <button type="submit" class="btn-primary btn-primary--full" id="submitBtn">資料請求・送信する</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer__brand">
+      <a href="#" class="footer__logo-large">Liserum</a>
+      <div class="footer__sns">
+        <a href="#" class="footer__sns-link" aria-label="X (Twitter)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" class="footer__sns-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" class="footer__sns-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <nav class="footer__links">
+      <a href="#about">Liserumとは</a>
+      <a href="#services">サービス</a>
+      <a href="#company">会社概要</a>
+      <a href="#news">NEWS</a>
+      <a href="#contact">資料請求</a>
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">利用規約</a>
+    </nav>
+
+    <div class="footer__divider"></div>
+
+    <p class="footer__copy">Copyright 2026 Liserum LLC.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
