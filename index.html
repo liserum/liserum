@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Japan Select</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
     --paper:#fbfaf7;
@@ -67,7 +67,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:"Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-family:"Inter","Noto Sans JP","Hiragino Sans",sans-serif;
     -webkit-font-smoothing:antialiased;
     padding:0 20px;
   }
@@ -107,18 +107,18 @@
   .wrap{max-width:1120px; margin:0 auto;}
 
   h1,h2,h3{
-    font-family:"Shippori Antique B1","Zen Kaku Gothic New",sans-serif;
-    font-weight:400;
+    font-family:"Inter","Noto Sans JP",sans-serif;
+    font-weight:600;
     margin:0;
     text-wrap:balance;
-    letter-spacing:0.01em;
+    letter-spacing:-0.01em;
   }
 
   a{color:inherit;}
   img{max-width:100%; display:block;}
 
   .mono{
-    font-family:"JetBrains Mono","SFMono-Regular",Menlo,monospace;
+    font-family:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
     letter-spacing:0.06em;
     text-transform:uppercase;
   }
@@ -148,7 +148,7 @@
     display:flex;
     align-items:center;
     gap:6px;
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.7rem;
     letter-spacing:0.08em;
   }
@@ -221,12 +221,13 @@
   .brand img{width:40px; height:40px;}
   .brand-type{display:flex; flex-direction:column; line-height:1.1;}
   .brand-type strong{
-    font-family:"Shippori Antique B1",sans-serif;
+    font-family:"Inter","Noto Sans JP",sans-serif;
     font-size:1.05rem;
-    letter-spacing:0.04em;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
   }
   .brand-type span{
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.6rem;
     color:var(--ink-faint);
     letter-spacing:0.1em;
@@ -238,7 +239,7 @@
     gap:28px;
   }
   nav.primary a{
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.72rem;
     letter-spacing:0.12em;
     text-transform:uppercase;
@@ -317,7 +318,7 @@
     display:inline-flex;
     align-items:center;
     gap:10px;
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.74rem;
     letter-spacing:0.09em;
     text-transform:uppercase;
@@ -338,7 +339,7 @@
   section{ padding-block:76px; border-top:1px solid var(--line); position:relative; }
   .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; }
   .section-head h2{ font-size:clamp(1.7rem, 3vw, 2.3rem); margin-top:10px; }
-  .section-num{ font-family:"JetBrains Mono",monospace; font-size:0.72rem; color:var(--ink-faint); }
+  .section-num{ font-family:"IBM Plex Mono",monospace; font-size:0.72rem; color:var(--ink-faint); }
 
   /* mission */
   .mission{
@@ -350,7 +351,9 @@
   .mission blockquote{
     margin:14px 0 0 0;
     max-width:none;
-    font-family:"Shippori Antique B1",sans-serif;
+    font-family:"Inter","Noto Sans JP",sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
     font-size:clamp(1.8rem, 3.6vw, 2.7rem);
     line-height:1.42;
     color:var(--ink);
@@ -384,24 +387,24 @@
   .cert{ transition:box-shadow .3s ease, transform .3s ease; }
   .cert:hover{ box-shadow:var(--shadow); transform:translateY(-3px); }
 
-  .cert-title{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.1em; margin-bottom:18px; }
+  .cert-title{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.1em; margin-bottom:18px; }
 
   /* founder */
   .founder{
     margin-top:44px;
-    max-width:820px;
+    max-width:none;
   }
   .founder-message-body{ display:flex; flex-direction:column; gap:22px; }
   .founder-quote{
     margin:0;
-    font-family:"Shippori Antique B1",sans-serif;
+    font-family:"Inter","Noto Sans JP",sans-serif;
     font-size:clamp(1.1rem, 2vw, 1.4rem);
     line-height:1.75;
     color:var(--ink);
   }
   .founder-sign{
     margin-top:20px;
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.72rem;
     color:var(--ink-faint);
     letter-spacing:0.04em;
@@ -415,7 +418,7 @@
     border-top:1px solid var(--line);
   }
   .info-row:first-of-type{ border-top:none; }
-  .info-row .k{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; padding-top:2px; }
+  .info-row .k{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; padding-top:2px; }
   .info-row .v{ font-size:0.95rem; line-height:1.6; }
   .info-row .v a{ text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px; }
   .info-row .v a:hover{ text-decoration-color:var(--red); color:var(--red); }
@@ -432,14 +435,14 @@
     transition:background .25s ease;
   }
   .service-item:hover{ background:var(--tint); }
-  .service-item .tag{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.08em; }
+  .service-item .tag{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.08em; }
   .service-item h3{ font-size:1.5rem; margin-top:8px; }
-  .service-item .brand-line{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; margin-top:10px; }
+  .service-item .brand-line{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; margin-top:10px; }
   .service-item p.desc{ margin-top:14px; font-size:0.96rem; line-height:1.75; max-width:60ch; }
   .service-side{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
 
   .stamp{
-    font-family:"JetBrains Mono",monospace;
+    font-family:"IBM Plex Mono",monospace;
     font-size:0.64rem;
     letter-spacing:0.08em;
     text-transform:uppercase;
@@ -466,11 +469,11 @@
   .foot-row{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
   .foot-brand{ display:flex; align-items:center; gap:10px; }
   .foot-brand img{ width:26px; height:26px; }
-  .foot-brand span{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.06em; }
+  .foot-brand span{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.06em; }
   footer nav{ display:flex; gap:20px; }
-  footer nav a{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--ink-soft); }
+  footer nav a{ font-family:"IBM Plex Mono",monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; color:var(--ink-soft); }
   footer nav a:hover{ color:var(--red); }
-  .foot-legal{ margin-top:14px; font-family:"JetBrains Mono",monospace; font-size:0.62rem; color:var(--ink-faint); letter-spacing:0.04em; }
+  .foot-legal{ margin-top:14px; font-family:"IBM Plex Mono",monospace; font-size:0.62rem; color:var(--ink-faint); letter-spacing:0.04em; }
 
   .company-strip{
     padding-block:48px;
@@ -536,7 +539,6 @@
 <header id="site-header">
   <div class="wrap nav-row">
     <a class="brand" href="#top" aria-label="Liserum — home">
-      <img src="logo.png" alt="Japan Select emblem: a crimson circular stamp with a torii-gate motif and rising sun, est. 2026" width="40" height="40">
       <span class="brand-type">
         <strong>Liserum</strong>
       </span>
@@ -643,7 +645,7 @@
         <div class="service-item reveal-on-scroll">
           <p class="tag mono">Item 02</p>
           <div>
-            <h3><span class="en">Cross-border e-commerce</span><span class="ja">越境EC事業</span></h3>
+            <h3><span class="en">Cross-border e-commerce</span><span class="ja">越境EC</span></h3>
             <p class="brand-line mono">Brand — Japan Select, on Shopee &amp; eBay</p>
             <p class="desc">
               <span class="en">Under the same Japan Select name, we operate cross-border storefronts on platforms such as Shopee and eBay, delivering carefully selected Japanese products directly to customers around the world.</span>
@@ -737,7 +739,6 @@
   <div class="wrap">
     <div class="foot-row">
       <div class="foot-brand">
-        <img src="logo.png" alt="">
         <span>Liserum LLC</span>
       </div>
       <nav aria-label="Footer">
