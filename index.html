@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Liserum LLCの越境メディア・越境EC事業ブランド Japan Select のコーポレートサイト">
 <title>Japan Select</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +72,38 @@
     padding:0 20px;
   }
 
+  .scroll-track{
+    position:fixed;
+    top:0; left:0; right:0;
+    height:3px;
+    background:var(--line);
+    z-index:60;
+  }
+  .scroll-fill{
+    display:block;
+    height:100%;
+    width:0%;
+    background:var(--red);
+  }
+
+  .reveal-on-scroll{ opacity:1; transform:none; }
+  .reveal-on-scroll.primed{
+    transform:translateY(18px);
+    transition:transform .7s ease;
+  }
+  .reveal-on-scroll.primed.shown{
+    transform:translateY(0);
+  }
+  .hero-pop.primed{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .5s ease, transform .6s cubic-bezier(.22,1.4,.36,1);
+  }
+  .hero-pop.primed.shown{
+    opacity:1;
+    transform:translateY(0);
+  }
+
   .wrap{max-width:1120px; margin:0 auto;}
 
   h1,h2,h3{
@@ -107,12 +138,36 @@
     display:inline-block;
   }
 
-  .bi .ja{
-    display:block;
-    color:var(--ink-soft);
-    font-weight:400;
-    letter-spacing:0.02em;
+  .en, .ja{ display:block; }
+  .ja{ margin-top:0.35em; }
+  html[data-lang="en"] .ja{ display:none !important; }
+  html[data-lang="ja"] .en{ display:none !important; }
+  html[data-lang="ja"] .ja{ margin-top:0; }
+
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
   }
+  .lang-switch button{
+    background:none;
+    border:none;
+    padding:2px 3px;
+    color:var(--hdr-ink-soft);
+    cursor:pointer;
+    font:inherit;
+    letter-spacing:inherit;
+    text-transform:uppercase;
+  }
+  .lang-switch button[aria-pressed="true"]{
+    color:var(--red);
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+  .lang-switch span{ color:var(--hdr-line); }
 
   :focus-visible{
     outline:2px solid var(--focus);
@@ -122,13 +177,32 @@
 
   /* ---------- header ---------- */
   header{
-    position:sticky;
-    top:0;
+    position:fixed;
+    top:0; left:0; right:0;
+    width:100%;
     z-index:50;
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .25s ease, border-color .25s ease;
+    --hdr-ink:#fff;
+    --hdr-ink-soft:rgba(255,255,255,.85);
+    --hdr-line:rgba(255,255,255,.55);
+  }
+  header.is-solid{
     background:color-mix(in srgb, var(--paper) 88%, transparent);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
+    --hdr-ink:var(--ink);
+    --hdr-ink-soft:var(--ink-soft);
+    --hdr-line:var(--line-strong);
   }
+  header[data-open="true"]{
+    background:var(--paper);
+    --hdr-ink:var(--ink);
+    --hdr-ink-soft:var(--ink-soft);
+    --hdr-line:var(--line-strong);
+  }
+  section, #top{ scroll-margin-top:88px; }
   .nav-row{
     display:flex;
     align-items:center;
@@ -141,6 +215,8 @@
     align-items:center;
     gap:12px;
     text-decoration:none;
+    color:var(--hdr-ink);
+    transition:color .25s ease;
   }
   .brand img{width:40px; height:40px;}
   .brand-type{display:flex; flex-direction:column; line-height:1.1;}
@@ -167,18 +243,18 @@
     letter-spacing:0.12em;
     text-transform:uppercase;
     text-decoration:none;
-    color:var(--ink-soft);
+    color:var(--hdr-ink-soft);
     padding-bottom:3px;
     border-bottom:1px solid transparent;
     transition:color .15s ease, border-color .15s ease;
   }
-  nav.primary a:hover{ color:var(--ink); border-color:var(--red); }
+  nav.primary a:hover{ color:var(--hdr-ink); border-color:var(--red); }
   .icon-btn{
     width:36px; height:36px;
     border-radius:50%;
-    border:1px solid var(--line-strong);
+    border:1px solid var(--hdr-line);
     display:flex; align-items:center; justify-content:center;
-    color:var(--ink);
+    color:var(--hdr-ink);
     text-decoration:none;
     transition:background .15s ease, color .15s ease, border-color .15s ease;
     flex:none;
@@ -189,46 +265,50 @@
   .menu-toggle{
     display:none;
     width:36px; height:36px;
-    border:1px solid var(--line-strong);
+    border:1px solid var(--hdr-line);
     border-radius:8px;
     background:none;
     align-items:center;
     justify-content:center;
-    color:var(--ink);
+    color:var(--hdr-ink);
     cursor:pointer;
   }
   .menu-toggle svg{width:18px; height:18px;}
 
   /* ---------- hero ---------- */
-  .hero{
+  .hero-visual{
+    position:relative;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    height:100vh;
+    min-height:420px;
+    overflow:hidden;
+    background:var(--paper-raised);
+  }
+  .hero-visual::after{
+    content:"";
+    position:absolute;
+    inset:0 0 auto 0;
+    height:160px;
+    background:linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,0));
+    pointer-events:none;
+  }
+  .hero-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
+  @media (max-width:900px){
+    .hero-visual{ height:70vh; min-height:320px; }
+  }
+  .hero-text.wrap{ max-width:1440px; }
+  .hero-text{
     padding-top:64px;
-    padding-bottom:56px;
+    padding-bottom:64px;
+    text-align:center;
   }
-  .hero h1{
-    font-size:clamp(2.3rem, 4.6vw, 3.8rem);
-    line-height:1.06;
-    margin-top:18px;
-  }
-  .hero h1 .ja{
-    font-size:0.42em;
-    margin-top:0.5em;
-    font-family:"Shippori Antique B1",sans-serif;
-  }
-  .hero p.lede{
-    margin-top:26px;
-    font-size:1.15rem;
-    line-height:1.75;
-    max-width:none;
-    color:var(--ink);
-  }
-  .hero p.lede .ja{
-    margin-top:0.6em;
-    font-size:1rem;
-    line-height:1.8;
-    max-width:none;
+  .hero-text h1{
+    font-size:clamp(2.1rem, 5.6vw, 5.2rem);
+    line-height:1.18;
   }
   .hero-actions{
-    margin-top:34px;
+    margin-top:40px;
     display:flex;
     flex-wrap:wrap;
     gap:14px;
@@ -275,12 +355,13 @@
     line-height:1.42;
     color:var(--ink);
   }
-  .mission blockquote .ja{
-    font-size:0.5em;
-    margin-top:0.6em;
-    color:var(--ink-soft);
+  .mission-copy{ max-width:none; display:flex; flex-direction:column; gap:18px; }
+  .mission-copy p{
+    margin:0;
+    font-size:1.05rem;
+    line-height:1.9;
+    color:var(--ink);
   }
-  .mission .cert{ max-width:640px; }
 
   .cert{
     position:relative;
@@ -300,7 +381,32 @@
   .corner.bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
   .corner.br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
 
+  .cert{ transition:box-shadow .3s ease, transform .3s ease; }
+  .cert:hover{ box-shadow:var(--shadow); transform:translateY(-3px); }
+
   .cert-title{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.1em; margin-bottom:18px; }
+
+  /* founder */
+  .founder{
+    margin-top:44px;
+    max-width:820px;
+  }
+  .founder-message-body{ display:flex; flex-direction:column; gap:22px; }
+  .founder-quote{
+    margin:0;
+    font-family:"Shippori Antique B1",sans-serif;
+    font-size:clamp(1.1rem, 2vw, 1.4rem);
+    line-height:1.75;
+    color:var(--ink);
+  }
+  .founder-sign{
+    margin-top:20px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.72rem;
+    color:var(--ink-faint);
+    letter-spacing:0.04em;
+  }
+  .founder-sign .en, .founder-sign .ja{ display:inline; margin-top:0; }
   .info-row{
     display:grid;
     grid-template-columns:160px 1fr;
@@ -311,7 +417,6 @@
   .info-row:first-of-type{ border-top:none; }
   .info-row .k{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; padding-top:2px; }
   .info-row .v{ font-size:0.95rem; line-height:1.6; }
-  .info-row .v .ja{ display:block; font-size:0.85rem; margin-top:0.3em; color:var(--ink-soft); }
   .info-row .v a{ text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px; }
   .info-row .v a:hover{ text-decoration-color:var(--red); color:var(--red); }
 
@@ -324,12 +429,13 @@
     grid-template-columns:120px 1fr 200px;
     gap:32px;
     align-items:start;
+    transition:background .25s ease;
   }
+  .service-item:hover{ background:var(--tint); }
   .service-item .tag{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--red); letter-spacing:0.08em; }
   .service-item h3{ font-size:1.5rem; margin-top:8px; }
   .service-item .brand-line{ font-family:"JetBrains Mono",monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.08em; margin-top:10px; }
   .service-item p.desc{ margin-top:14px; font-size:0.96rem; line-height:1.75; max-width:60ch; }
-  .service-item p.desc .ja{ font-size:0.87rem; margin-top:0.6em; line-height:1.8; }
   .service-side{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
 
   .stamp{
@@ -348,24 +454,12 @@
   /* contact */
   .contact-grid{
     margin-top:44px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:48px;
-    align-items:center;
   }
-  .contact-copy p{ font-size:1rem; line-height:1.8; max-width:46ch; }
-  .contact-copy p .ja{ display:block; margin-top:0.6em; font-size:0.9rem; color:var(--ink-soft); }
+  .contact-copy p{ font-size:1rem; line-height:1.8; max-width:none; white-space:nowrap; }
+  @media (max-width:640px){
+    .contact-copy p{ white-space:normal; }
+  }
   .contact-actions{ margin-top:28px; display:flex; flex-wrap:wrap; gap:14px; }
-  .contact-panel{
-    border:1px solid var(--line-strong);
-    background:var(--paper-raised);
-    padding:30px 28px;
-    position:relative;
-  }
-  .contact-panel img{ width:52px; height:52px; margin-bottom:16px; }
-  .contact-panel .addr{ font-size:0.86rem; line-height:1.8; color:var(--ink-soft); }
-  .contact-panel .addr .en{ display:block; }
-  .contact-panel .addr .ja{ display:block; margin-top:6px; }
 
   /* footer */
   footer{ border-top:1px solid var(--line); padding-block:34px; }
@@ -378,19 +472,43 @@
   footer nav a:hover{ color:var(--red); }
   .foot-legal{ margin-top:14px; font-family:"JetBrains Mono",monospace; font-size:0.62rem; color:var(--ink-faint); letter-spacing:0.04em; }
 
+  .company-strip{
+    padding-block:48px;
+    border-top:1px solid var(--line);
+  }
+  .company-strip .foot-info{
+    margin-top:20px;
+    padding-top:0;
+    border-top:none;
+  }
+
+  .foot-info{
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .foot-info p{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+  }
+  .foot-info .k{ min-width:120px; color:var(--ink-faint); }
+  .foot-info a{ color:inherit; text-decoration:underline; text-decoration-color:var(--line-strong); text-underline-offset:3px; }
+  .foot-info a:hover{ color:var(--red); }
+
   /* reveal animation */
   .reveal{ animation:rise .7s ease both; }
   @keyframes rise{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
 
   @media (max-width:900px){
-    .hero{ grid-template-columns:1fr; padding-top:40px; }
-    .seal-frame{ order:-1; }
-    .seal-frame img{ width:150px; margin:0 auto; }
-    .mission{ grid-template-columns:1fr; }
     .service-item{ grid-template-columns:1fr; gap:14px; padding-block:30px; }
     .service-side{ flex-direction:row; flex-wrap:wrap; }
-    .contact-grid{ grid-template-columns:1fr; }
-    .manifest-row{ grid-template-columns:1fr 1fr; }
   }
   @media (max-width:640px){
     nav.primary{ display:none; }
@@ -407,9 +525,11 @@
       gap:16px;
     }
     .info-row{ grid-template-columns:1fr; gap:4px; }
-    .manifest-row{ grid-template-columns:1fr; }
   }
 </style>
+
+<div class="scroll-track" aria-hidden="true"><span class="scroll-fill"></span></div>
+
 
 </head>
 <body>
@@ -425,6 +545,11 @@
       <a href="#company">Company</a>
       <a href="#service">Service</a>
       <a href="#contact">Contact</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="en">EN</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-lang-btn="ja">日本語</button>
+      </div>
       <a href="https://www.instagram.com/japan_souvenir_guide" class="icon-btn" target="_blank" rel="noopener" aria-label="Japan Select on Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
       </a>
@@ -441,22 +566,14 @@
 </header>
 
 <main id="top">
-  <div class="wrap hero">
-    <div class="reveal">
-      <p class="eyebrow mono">Cross-border media &amp; e-commerce · Est. 2026</p>
-      <h1 class="bi">Japan, selected for the world.<span class="ja">日本の逸品を、世界の日常へ。</span></h1>
-      <p class="lede bi">
-        We curate and deliver Japan's finest products to a global audience — through cross-border media and e-commerce, together under one name: Japan Select.
-        <span class="ja">越境メディアと越境ECを通じて、日本の選りすぐりの製品を世界のお客様へ。すべて「Japan Select」という一つの名前で届けます。</span>
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-solid" href="https://www.instagram.com/japan_souvenir_guide" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
-          Follow @japan_souvenir_guide
-        </a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
-      </div>
-    </div>
+  <div class="hero-visual reveal">
+    <img src="globe.jpg" alt="A globe with Japanese products — sake, matcha, a folding fan, cosmetics, tea ware, a leather bag — connected by glowing lines radiating out from Japan to destinations around the world.">
+  </div>
+  <div class="wrap hero-text reveal-on-scroll hero-pop">
+    <h1>
+      <span class="en">Japan's finest, into the world.<br>And its strength restored.</span>
+      <span class="ja">日本の逸品を、世界の日常へ。<br>そして、国力を取り戻す。</span>
+    </h1>
   </div>
 
   <section id="company">
@@ -464,43 +581,32 @@
       <div class="section-head">
         <div>
           <p class="section-num mono">01 / Company</p>
-          <h2>会社情報</h2>
+          <h2><span class="en">Company</span><span class="ja">会社情報</span></h2>
         </div>
       </div>
 
-      <div class="mission">
+      <div class="mission reveal-on-scroll">
         <div>
           <p class="eyebrow mono">Our mission / 経営理念</p>
-          <blockquote class="bi">
-            We bring Japan's finest products to the world, and build the routes that carry them — to enrich the lives of everyone along the way.
-            <span class="ja">日本の素晴らしい製品を海外に発信し、流通をさせることによって、関係者全員の人生を豊かにする。</span>
+          <blockquote>
+            <span class="en">We bring Japan's finest products to the world, and build the routes that carry them — to enrich the lives of everyone along the way.</span>
+            <span class="ja">日本の素晴らしい製品を海外に発信し、<br>流通をさせることによって、関係者全員の人生を豊かにする。</span>
           </blockquote>
         </div>
 
-        <div class="cert">
-          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-          <p class="cert-title mono">Company overview / 会社概要</p>
-
-          <div class="info-row">
-            <span class="k mono">Company name</span>
-            <span class="v">Liserum LLC<span class="ja">Liserum合同会社</span></span>
-          </div>
-          <div class="info-row">
-            <span class="k mono">Founded</span>
-            <span class="v">April 1, 2026<span class="ja">2026年4月1日</span></span>
-          </div>
-          <div class="info-row">
-            <span class="k mono">Representative</span>
-            <span class="v">Kanta Goto<span class="ja">後藤寛太</span></span>
-          </div>
-          <div class="info-row">
-            <span class="k mono">Address</span>
-            <span class="v">Bay City Shin-Urayasu D-701, 3-4 Hinode, Urayasu-shi, Chiba, Japan<span class="ja">千葉県浦安市日の出3丁目4番D-701号 ベイシティ新浦安</span></span>
-          </div>
-          <div class="info-row">
-            <span class="k mono">Contact</span>
-            <span class="v"><a href="mailto:k_goto@liserum.com">k_goto@liserum.com</a></span>
-          </div>
+        <div class="mission-copy">
+          <p>
+            <span class="en">Japan has long been a nation the world admired for its craftsmanship — the skill of its artisans, an obsession with detail, an uncompromising commitment to quality. Over many decades, this has produced an extraordinary number of exceptional products, and Japan is still home to countless products the world would be proud to know today.</span>
+            <span class="ja">日本は、古くから世界に誇るものづくりの国でした。職人の技術、細部へのこだわり、品質への妥協なき姿勢。日本では、長い年月をかけて、数多くの素晴らしい製品が生み出されてきました。そして今も、日本には世界に誇れる製品が数多く存在しています。</span>
+          </p>
+          <p>
+            <span class="en">And yet, compared to the era when Japanese products commanded real presence around the world, we don't believe their appeal is reaching — or being put into circulation — internationally as fully as it could be.</span>
+            <span class="ja">一方で、かつての日本製品が世界中で存在感を放っていた時代と比べると、その魅力が十分に海外へ届き、流通しているとは言えないのではないかと、私たちは考えています。</span>
+          </p>
+          <p>
+            <span class="en">That is why Liserum shares the appeal of Japan's finest products with the world and carries them across borders. When those products enrich lives around the world and are chosen everywhere, Japanese companies and producers gain room to take on new challenges — and Japan's economy grows strong again. By connecting Japan and the world, we aim to create that cycle. Sharing Japan's finest products with the world, and putting them into circulation, to enrich the lives of everyone involved: that is Liserum's mission.</span>
+            <span class="ja">だからこそ、Liserumは、日本の素晴らしい製品の魅力を世界へ発信し、国境を越えて届けていきます。日本の製品が世界中の人々の暮らしをより豊かにし、世界中で選ばれる。その結果として、日本の企業や生産者がさらに挑戦できる環境が生まれ、日本経済が再び強くなっていく。私たちは、日本と世界をつなぐことで、その循環を生み出していきます。日本の素晴らしい製品を海外に発信し、流通をさせることによって、関係者全員の人生を豊かにする。それが、Liserumの使命です。</span>
+          </p>
         </div>
       </div>
     </div>
@@ -511,18 +617,18 @@
       <div class="section-head">
         <div>
           <p class="section-num mono">02 / Service</p>
-          <h2>事業内容</h2>
+          <h2><span class="en">Service</span><span class="ja">事業内容</span></h2>
         </div>
       </div>
 
       <div class="service-list">
-        <div class="service-item">
+        <div class="service-item reveal-on-scroll">
           <p class="tag mono">Item 01</p>
           <div>
-            <h3>Cross-border media<br>越境メディア運営</h3>
+            <h3><span class="en">Cross-border media</span><span class="ja">越境メディア</span></h3>
             <p class="brand-line mono">Brand — Japan Select</p>
-            <p class="desc bi">
-              We run Japan Select, a media brand introducing Japan's culture, craftsmanship, and everyday treasures to audiences abroad — building the awareness and trust that turns curiosity into demand.
+            <p class="desc">
+              <span class="en">We run Japan Select, a media brand introducing Japan's culture, craftsmanship, and everyday treasures to audiences abroad — building the awareness and trust that turns curiosity into demand.</span>
               <span class="ja">「Japan Select」として、日本の文化や匠の技、暮らしに息づく逸品を海外へ発信。認知と信頼を積み重ね、興味を需要へと変えていきます。</span>
             </p>
           </div>
@@ -534,13 +640,13 @@
           </div>
         </div>
 
-        <div class="service-item">
+        <div class="service-item reveal-on-scroll">
           <p class="tag mono">Item 02</p>
           <div>
-            <h3>Cross-border e-commerce<br>越境EC</h3>
+            <h3><span class="en">Cross-border e-commerce</span><span class="ja">越境EC事業</span></h3>
             <p class="brand-line mono">Brand — Japan Select, on Shopee &amp; eBay</p>
-            <p class="desc bi">
-              Under the same Japan Select name, we operate cross-border storefronts on platforms such as Shopee and eBay, delivering carefully selected Japanese products directly to customers around the world.
+            <p class="desc">
+              <span class="en">Under the same Japan Select name, we operate cross-border storefronts on platforms such as Shopee and eBay, delivering carefully selected Japanese products directly to customers around the world.</span>
               <span class="ja">同じ「Japan Select」ブランドで、Shopee・eBayなどのプラットフォーム上に越境EC店舗を展開。厳選した日本製品を世界中のお客様へ直接お届けします。</span>
             </p>
           </div>
@@ -553,19 +659,51 @@
     </div>
   </section>
 
+  <section id="founder">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-num mono">03 / Founder's message</p>
+          <h2><span class="en">Founder's message</span><span class="ja">代表メッセージ</span></h2>
+        </div>
+      </div>
+
+      <div class="founder reveal-on-scroll">
+          <div class="founder-message-body">
+            <p class="founder-quote">
+              <span class="en">Look around the world, and our daily lives are filled with services and products born in America — Google, Apple, Meta, Amazon, Microsoft, and now OpenAI, Anthropic. Search, the smartphone, social media, e-commerce, the cloud, and now AI. The products and services these companies have built have made our lives more convenient and richer than ever before. I hold real gratitude and respect for that.</span>
+              <span class="ja">世界を見渡すと、私たちの暮らしはアメリカ発のサービスやプロダクトで溢れています。Google、Apple、Meta、Amazon、Microsoft。そして、OpenAI、Anthropic。検索、スマートフォン、SNS、EC、クラウド、そしてAI。これらの企業が生み出した製品やサービスによって、私たちの暮らしは、かつてないほど便利で豊かなものになりました。私は、そのことに大きな感謝と敬意を抱いています。</span>
+            </p>
+            <p class="founder-quote">
+              <span class="en">At the same time, as one world-changing company after another has emerged and reshaped how people everywhere live, I feel Japan's economy has been relatively losing its presence. But that doesn't mean Japan has nothing left to be proud of. Japan still holds techniques refined over a long history, an unwavering commitment to quality, a distinct sensibility, and no shortage of products capable of captivating people around the world. Their value simply isn't reaching the world as fully as it could — and that's exactly where I see enormous potential.</span>
+              <span class="ja">一方で、こうした世界的な企業が次々と生まれ、世界中の人々の生活を変えていく中で、日本経済は相対的に存在感を失いつつあるようにも感じています。しかし、日本に世界に誇れるものがなくなったわけではありません。日本には、長い歴史の中で培われた技術、品質へのこだわり、独自の感性、そして世界中の人々を魅了できる素晴らしい製品が、今も数多く存在しています。ただ、その価値が世界に十分に届いていない。私は、そこに大きな可能性があると考えています。</span>
+            </p>
+            <p class="founder-quote">
+              <span class="en">That is why Liserum exists to be a bridge between Japan and the world — finding Japan's finest products, sharing their appeal, and delivering them to the people who need them. Carrying each product out into the world helps Japanese companies and producers take on new challenges, enriches lives everywhere, and, in time, becomes strength for Japan's economy. That is the larger cycle we want to create.</span>
+              <span class="ja">だからこそ、Liserumは、日本と世界をつなぐ「架け橋」になります。日本の素晴らしい製品を見つけ、その魅力を世界へ発信し、必要としている人のもとへ届ける。一つひとつの製品を世界へ届けることが、日本の企業や生産者の新たな挑戦につながり、世界中の人々の暮らしを豊かにし、やがて日本経済の力になる。私たちは、そんな大きな循環を生み出したいと考えています。</span>
+            </p>
+          </div>
+          <p class="founder-sign mono">
+            <span class="en">— Kanta Goto, Representative Partner, Liserum LLC</span>
+            <span class="ja">— Liserum合同会社　代表社員　後藤寛太</span>
+          </p>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="section-num mono">03 / Contact</p>
-          <h2>お問い合わせ</h2>
+          <p class="section-num mono">04 / Contact</p>
+          <h2><span class="en">Contact</span><span class="ja">お問い合わせ</span></h2>
         </div>
       </div>
 
-      <div class="contact-grid">
+      <div class="contact-grid reveal-on-scroll">
         <div class="contact-copy">
-          <p class="bi">
-            For media partnerships, product sourcing, or wholesale inquiries, we'd love to hear from you.
+          <p>
+            <span class="en">For media partnerships, product sourcing, or wholesale inquiries, we'd love to hear from you.</span>
             <span class="ja">メディア掲載のご相談、商品の買い付け、卸売のお問い合わせなどは、お気軽にご連絡ください。</span>
           </p>
           <div class="contact-actions">
@@ -579,18 +717,20 @@
             </a>
           </div>
         </div>
-
-        <div class="contact-panel">
-          <img src="logo.png" alt="" role="presentation">
-          <p class="cert-title mono">Liserum LLC</p>
-          <p class="addr">
-            <span class="en">Bay City Shin-Urayasu D-701, 3-4 Hinode, Urayasu-shi, Chiba, Japan</span>
-            <span class="ja">千葉県浦安市日の出3丁目4番D-701号 ベイシティ新浦安</span>
-          </p>
-        </div>
       </div>
     </div>
   </section>
+
+  <div class="wrap company-strip">
+    <p class="eyebrow mono">Company overview / 会社概要</p>
+    <div class="foot-info mono">
+      <p><span class="k">Company</span><span class="en">Liserum LLC</span><span class="ja">Liserum合同会社</span></p>
+      <p><span class="k">Representative</span><span class="en">Kanta Goto</span><span class="ja">後藤寛太</span></p>
+      <p><span class="k">Founded</span><span class="en">April 1, 2026</span><span class="ja">2026年4月1日</span></p>
+      <p><span class="k">Address</span><span class="en">Bay City Shin-Urayasu D-701, 3-4 Hinode, Urayasu-shi, Chiba, Japan</span><span class="ja">千葉県浦安市日の出3丁目4番D-701号 ベイシティ新浦安</span></p>
+      <p><span class="k">Contact</span><a href="mailto:k_goto@liserum.com">k_goto@liserum.com</a></p>
+    </div>
+  </div>
 </main>
 
 <footer>
@@ -598,7 +738,7 @@
     <div class="foot-row">
       <div class="foot-brand">
         <img src="logo.png" alt="">
-        <span>Japan Select / Liserum LLC</span>
+        <span>Liserum LLC</span>
       </div>
       <nav aria-label="Footer">
         <a href="#company">Company</a>
@@ -606,9 +746,69 @@
         <a href="#contact">Contact</a>
       </nav>
     </div>
-    <p class="foot-legal">© 2026 Liserum LLC. All rights reserved. Japan Select is a brand operated by Liserum LLC.</p>
+
+    <p class="foot-legal">© 2026 Liserum LLC. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var langBtns = document.querySelectorAll('[data-lang-btn]');
+  function setLang(lang){
+    root.setAttribute('data-lang', lang);
+    try{ localStorage.setItem('js-lang', lang); }catch(e){}
+    langBtns.forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-lang-btn') === lang ? 'true' : 'false');
+    });
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem('js-lang'); }catch(e){}
+  setLang(saved === 'ja' ? 'ja' : 'en');
+  langBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang-btn')); });
+  });
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!reduced && 'IntersectionObserver' in window){
+    var els = document.querySelectorAll('.reveal-on-scroll');
+    els.forEach(function(el){ el.classList.add('primed'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('shown');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  var fill = document.querySelector('.scroll-fill');
+  var siteHeader = document.getElementById('site-header');
+  if(fill || siteHeader){
+    var ticking = false;
+    function updateProgress(){
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop;
+      if(fill){
+        var height = doc.scrollHeight - doc.clientHeight;
+        var pct = height > 0 ? Math.min(100, (scrollTop / height) * 100) : 0;
+        fill.style.width = pct + '%';
+      }
+      if(siteHeader){
+        siteHeader.classList.toggle('is-solid', scrollTop > 40);
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ window.requestAnimationFrame(updateProgress); ticking = true; }
+    }, {passive:true});
+    updateProgress();
+  }
+})();
+</script>
 
 </body>
 </html>
